@@ -1,6 +1,10 @@
 package parkerfish_v1;
 
-public class Constants {
+import java.util.ArrayList;
+
+import parkerfish_v1.datatypes.game;
+
+public class cons {
 
     // This file is supposed to act like a cpp headers file, im doing this as im reading a chess engine book made for cpp coding
 
@@ -89,6 +93,16 @@ public class Constants {
     public static final int WEST = 6;
     public static final int NW = 7;
 
+    // pieces
+
+    public static final int P = 0;
+    public static final int N = 1;
+    public static final int B = 2;
+    public static final int R = 3;
+    public static final int Q = 4;
+    public static final int K = 5;
+    public static final int EMPTY = 6;
+
     // teams
 
     public static final int White = 0;
@@ -98,7 +112,10 @@ public class Constants {
 
     public static final int MAX_PLY = 64;
     public static final int MOVE_STACK = 4000;
+    public static final int GAME_STACK = 2000;
 
+    ArrayList<game> game_list = new ArrayList<>(GAME_STACK);
+    
 
     
 }

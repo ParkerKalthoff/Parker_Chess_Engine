@@ -2,8 +2,10 @@ package parkerfish_v1;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
-        long a = 0b01010110;
+
+        long a = 1L << 62;
+
+        System.out.println(a);
     }
 
     
