@@ -113,6 +113,8 @@ public class cons {
     public static final int MAX_PLY = 64;
     public static final int MOVE_STACK = 4000;
     public static final int GAME_STACK = 2000;
+    public static final int HASH_SCORE = 10000000;
+    public static final int CAPTURE_SCORE = 1000000;
 
     ArrayList<game> game_list = new ArrayList<>(GAME_STACK);
     
