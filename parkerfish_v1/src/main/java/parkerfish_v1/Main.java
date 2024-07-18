@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
 
     
-        printBitboard(bitboard.generateAllSquaresBetween()[7][21]);
+        printBitboard(0xf0f0f0f0f0f0f0f0L);
 
     }
     public static void printBitboard(long bitboard) {
@@ -19,6 +19,7 @@ public class Main {
         }
         System.out.println();  // Add an extra line for better readability
     }
+    
 
     
 }
