@@ -1,8 +1,9 @@
 package parkerfish_v1;
 
+import java.util.concurrent.TimeUnit;
+
 public class bitboard extends cons{
 
-    public static cons cons = new cons(); 
     public static Long bit_pawncaptures[][] = new Long[2][64]; 
     public static Long bit_pawndefends[][] = new Long[2][64];
     public static Long bit_left[][] = new Long[2][64];
@@ -17,7 +18,7 @@ public class bitboard extends cons{
     public static Long bit_units[] = new Long[2];
     public static Long bit_all = 0xffffffffffffffffL;
     public static Long bit_between[][] = generateAllSquaresBetween();
-    public static Long bit_after[][] = new Long[64][64];
+    public static Long bit_after[][] = generateAllBitsAfter();
     public static Long mask_passed[][] = new Long[2][64];
     public static Long mask_path[][] = new Long[2][64];
     public static Long mask[] = new Long[64];
@@ -29,9 +30,9 @@ public class bitboard extends cons{
     public static Long not_a_file;
     public static Long not_h_file;
 
-    public static Integer row[] = {7, 7, 7, 7, 7, 7, 7, 7, 6, 6, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 5, 5, 5, 5, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0};
-    public static Integer col[] = {0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7};
-
+    public static int bits_row[] = {0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7};
+    public static int bits_rank[] = {0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7};
+    // (A 1), (B 2), (C 3), (D 4), (E 5), (F 6), (G 7), (H 8)
     public static Integer pawnplus[][] = new Integer[2][64];
     public static Integer pawndouble[][] = new Integer[2][64];
     public static Integer pawnleft[][] = new Integer[2][64];
@@ -49,7 +50,46 @@ public class bitboard extends cons{
 
     }
 
+    public static Long[][] generateAllBitsAfter(){
+        Long bitsAfter[][] = new Long[64][64];
+        for(int i = 0; i < 64; i++){
+            for(int y = 0; y < 64; y++){
+                bitsAfter[i][y] = getBitsAfter(i, y);
+            }   
+        }
+        return bitsAfter;
+    }
 
+    public static Long getBitsAfter(int startIndex, int endIndex) {
+        
+        // 8 [56][57][58][59][60][61][62][63]
+        // 7 [48][49][50][51][52][53][54][55]
+        // 6 [40][41][42][43][44][45][46][47]
+        // 5 [32][33][34][35][36][37][38][39]
+        // 4 [24][25][26][27][28][29][30][31]
+        // 3 [16][17][18][19][20][21][22][23]
+        // 2 [08][09][10][11][12][13][14][15]
+        // 1 [00][01][02][03][04][05][06][07]
+        //    A   B   C   D   E   F   G   H
+
+        // ^  [RANK/ROW][ROW][ROW][ROW][ROW][ROW][ROW][ROW]
+        // R  [RANK] 
+        // A  [RANK]
+        // N  [RANK]
+        // K  [RANK]
+        // S  [RANK]
+        // v  [RANK]
+        //    [RANK]
+        //    <   R   O   W   S   >
+
+        Long bitsafter = 0L;
+
+        float vector = startIndex - endIndex;
+
+
+
+        return bitsafter;
+    }
     
     
     private static Long[][] generateAllSquaresBetween(){

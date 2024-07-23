@@ -2,8 +2,11 @@ package parkerfish_v1;
 
 public class Main extends bitboard{
     public static void main(String[] args) {
-        printBitboard(bit_after[A4][C6]);
 
+        //printBitboard(1L << A2);
+        System.out.println(bits_row[A1]);
+
+        printBitboard(1L << A1, true);
     }
     public static void printBitboard(long bitboard, boolean with_coords) {
         for (int rank = 7; rank >= 0; rank--) {  // Start from the top rank (rank 7)
