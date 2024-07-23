@@ -100,7 +100,7 @@ public class bitboard extends cons{
             scalar = 9;
         } else {return 0L;};
         
-        
+
 
         return bitsafter;
     }

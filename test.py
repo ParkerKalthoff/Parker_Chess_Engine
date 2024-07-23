@@ -1,9 +1,27 @@
-def bgto(value, offset):
+def bits_below_offset(value, offset):
+    # Create a bitmask with bits below the offset set to 1
     mask = (1 << offset) - 1
-    return value & ~mask
+    # Apply the bitmask to get the bits below the offset
+    return value & mask
 
-print(bgto(34, 3))
+def bits_above_offset(value, offset):
+    # Create a bitmask with bits above the offset set to 1
+    mask = ~((1 << offset) - 1)
+    # Apply the bitmask to get the bits above the offset
+    return value & mask
 
+def display_bitboard(bitboard):
+    # Convert the bitboard to a 64-bit binary string
+    binary_string = f"{bitboard:064b}"
+    
+    # Split the binary string into 8 rows of 8 bits each
+    rows = [binary_string[i*8:(i+1)*8] for i in range(8)]
+    
+    # Print the bitboard in a human-readable format
+    for row in rows:
+        print(' '.join(row))
+
+display_bitboard(bits_below_offset(0xffffffffffffffff, 16))
 
 # 8 [56][57][58][59][60][61][62][63]
 # 7 [48][49][50][51][52][53][54][55]
