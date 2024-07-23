@@ -1,5 +1,5 @@
 package parkerfish_v1;
-
+import static java.lang.Math.abs;
 import java.util.concurrent.TimeUnit;
 
 public class bitboard extends cons{
@@ -84,9 +84,23 @@ public class bitboard extends cons{
 
         Long bitsafter = 0L;
 
-        float vector = startIndex - endIndex;
+        long vector = Math.abs(startIndex - endIndex);
 
+        if(vector == 0L){return 0L;} // Identical start and ends
 
+        int scalar;
+
+        if(startIndex % 8 == endIndex % 8){ // Same rank
+            scalar = 8;
+        } else if(startIndex / 8 == endIndex / 8){ // same row
+            scalar = 1;
+        } else if((vector & 0x2040810204080L) > 0) { // North west to south east diagonal -> \ 
+            scalar = 7;
+        } else if((vector & 0x8040201008040200L) > 0){// South west to north east diagonal -> /
+            scalar = 9;
+        } else {return 0L;};
+        
+        
 
         return bitsafter;
     }
