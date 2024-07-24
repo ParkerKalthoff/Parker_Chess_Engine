@@ -10,18 +10,23 @@ def bits_above_offset(value, offset):
     # Apply the bitmask to get the bits above the offset
     return value & mask
 
-def display_bitboard(bitboard):
-    # Convert the bitboard to a 64-bit binary string
-    binary_string = f"{bitboard:064b}"
-    
-    # Split the binary string into 8 rows of 8 bits each
-    rows = [binary_string[i*8:(i+1)*8] for i in range(8)]
-    
-    # Print the bitboard in a human-readable format
-    for row in rows:
-        print(' '.join(row))
+def print_bitboard(bitboard, with_coords=False):
+    for rank in range(7, -1, -1):  # Start from the top rank (rank 7)
+        if with_coords:
+            print(f"{rank + 1}   ", end="")
+        for file in range(8):  # Iterate through each file in the rank
+            square = rank * 8 + file
+            mask = 1 << square
+            # Print 1 if the bit at the current square is set, otherwise print 0
+            print("1 " if (bitboard & mask) != 0 else "0 ", end="")
+        print()
+        # Move to the next line after printing a rank
+    if with_coords:
+        print("    A B C D E F G H")
 
-display_bitboard(bits_below_offset(0xffffffffffffffff, 16))
+# Example usage:
+bitboard = 0xff << 56  # Example bitboard with the top-left corner set
+print_bitboard(bitboard)
 
 # 8 [56][57][58][59][60][61][62][63]
 # 7 [48][49][50][51][52][53][54][55]

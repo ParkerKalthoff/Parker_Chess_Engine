@@ -1,6 +1,4 @@
 package parkerfish_v1;
-import static java.lang.Math.abs;
-import java.util.concurrent.TimeUnit;
 
 public class bitboard extends cons{
 
@@ -17,13 +15,14 @@ public class bitboard extends cons{
     public static Long bit_pieces[][] = new Long[2][7];
     public static Long bit_units[] = new Long[2];
     public static Long bit_all = 0xffffffffffffffffL;
+    public static Long mask_cols[] = {0x101010101010101L << 0, 0x101010101010101L << 1, 0x101010101010101L << 2, 0x101010101010101L << 3, 0x101010101010101L << 4, 0x101010101010101L << 5, 0x101010101010101L << 6, 0x101010101010101L << 7};
+    public static Long mask_rows[] = {0xffL << 0, 0xffL << 8, 0xffL << 16, 0xffL << 24, 0xffL << 32, 0xffL << 40, 0xffL << 48, 0xffL << 56};
     public static Long bit_between[][] = generateAllSquaresBetween();
     public static Long bit_after[][] = generateAllBitsAfter();
     public static Long mask_passed[][] = new Long[2][64];
     public static Long mask_path[][] = new Long[2][64];
     public static Long mask[] = new Long[64];
     public static Long not_mask[] = new Long[64];
-    public static Long mask_cols[] = new Long[64];
     public static Long mask_isolated[] = new Long[64];
     public static Long kingside = 0xf0f0f0f0f0f0f0f0L;
     public static Long queenside = 0x0f0f0f0f0f0f0f0fL;
@@ -83,24 +82,25 @@ public class bitboard extends cons{
         //    <   R   O   W   S   >
 
         Long bitsafter = 0L;
-
         long vector = Math.abs(startIndex - endIndex);
+
+        long mask = (((1L << endIndex) - 1) | endIndex); if(startIndex < endIndex){mask = ~mask;};
+
+
 
         if(vector == 0L){return 0L;} // Identical start and ends
 
-        int scalar;
+        int scalar = ((startIndex < endIndex) ? 1 : -1);
 
         if(startIndex % 8 == endIndex % 8){ // Same rank
-            scalar = 8;
+            return mask_cols[endIndex % 8] & mask;
         } else if(startIndex / 8 == endIndex / 8){ // same row
-            scalar = 1;
-        } else if((vector & 0x2040810204080L) > 0) { // North west to south east diagonal -> \ 
-            scalar = 7;
-        } else if((vector & 0x8040201008040200L) > 0){// South west to north east diagonal -> /
-            scalar = 9;
+            return mask_rows[endIndex / 8] & mask;
+        } else if(((1L << vector) & 0x2040810204080L) > 0) { // North west to south east diagonal -> \ 
+            scalar *= 7;
+        } else if((1L << vector & 0x8040201008040200L) > 0){// South west to north east diagonal -> /
+            scalar *= 9;
         } else {return 0L;};
-        
-
 
         return bitsafter;
     }
