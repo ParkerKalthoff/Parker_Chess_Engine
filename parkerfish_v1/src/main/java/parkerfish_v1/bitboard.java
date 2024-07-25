@@ -49,6 +49,20 @@ public class bitboard extends cons{
 
     }
 
+    public static long scalarToBoardEdge(int startIndex, int scalar){
+
+        if(scalar == 1 || scalar == -1 || scalar == 8 || scalar == -8 || scalar == 9 || scalar == -9 || scalar == 7 || scalar == -7){throw new java.lang.RuntimeException("this is not quite as bad");}
+
+        long bb = 1L << startIndex;
+        int current_square = startIndex;
+
+        while (true) {
+            bb
+        }
+
+        return bb;
+    }
+
     public static Long[][] generateAllBitsAfter(){
         Long bitsAfter[][] = new Long[64][64];
         for(int i = 0; i < 64; i++){
