@@ -7,6 +7,16 @@ public class bitboard extends cons{
     public static Long bit_left[][] = new Long[2][64];
     public static Long bit_right[][] = new Long[2][64];
     public static Long bit_pawnmoves[][] = new Long[2][64];
+
+    public static Long[] bit_north = generateAllScalarToEdges(8);
+    public static Long[] bit_northeast = generateAllScalarToEdges(9);
+    public static Long[] bit_east = generateAllScalarToEdges(1);
+    public static Long[] bit_southeast = generateAllScalarToEdges(-7);
+    public static Long[] bit_south = generateAllScalarToEdges(-8);
+    public static Long[] bit_southwest = generateAllScalarToEdges(-9);
+    public static Long[] bit_west = generateAllScalarToEdges(-1);
+    public static Long[] bit_northwest = generateAllScalarToEdges(7);
+
     public static Long bit_knightmoves[] = {0x20400L,0x50800L,0xa1100L,0x142200L,0x284400L,0x508800L,0xa01000L,0x402000L,0x2040004L,0x5080008L,0xa110011L,0x14220022L,0x28440044L,0x50880088L,0xa0100010L,0x40200020L,0x204000402L,0x508000805L,0xa1100110aL,0x1422002214L,0x2844004428L,0x5088008850L,0xa0100010a0L,0x4020002040L,0x20400040200L,0x50800080500L,0xa1100110a00L,0x142200221400L,0x284400442800L,0x508800885000L,0xa0100010a000L,0x402000204000L,0x2040004020000L,0x5080008050000L,0xa1100110a0000L,0x14220022140000L,0x28440044280000L,0x50880088500000L,0xa0100010a00000L,0x40200020400000L,0x204000402000000L,0x508000805000000L,0xa1100110a000000L,0x1422002214000000L,0x2844004428000000L,0x5088008850000000L,0xa0100010a0000000L,0x4020002040000000L,0x400040200000000L,0x800080500000000L,0x1100110a00000000L,0x2200221400000000L,0x4400442800000000L,0x8800885000000000L,0x100010a000000000L,0x2000204000000000L,0x4020000000000L,0x8050000000000L,0x110a0000000000L,0x22140000000000L,0x44280000000000L,0x88500000000000L,0x10a00000000000L,0x20400000000000L};
     public static Long bit_bishopmoves[] = {0x8040201008040200L,0x0080402010080500L,0x0000804020110a00L,0x0000008041221400L,0x0000000182442800L,0x0000010204885000L,0x000102040810a000L,0x0102040810204000L,0x4020100804020002L,0x8040201008050005L,0x00804020110a000aL,0x0000804122140014L,0x0000018244280028L,0x0001020488500050L,0x0102040810a000a0L,0x0204081020400040L,0x2010080402000204L,0x4020100805000508L,0x804020110a000a11L,0x0080412214001422L,0x0001824428002844L,0x0102048850005088L,0x02040810a000a010L,0x0408102040004020L,0x1008040200020408L,0x2010080500050810L,0x4020110a000a1120L,0x8041221400142241L,0x0182442800284482L,0x0204885000508804L,0x040810a000a01008L,0x0810204000402010L,0x0804020002040810L,0x1008050005081020L,0x20110a000a112040L,0x4122140014224180L,0x8244280028448201L,0x0488500050880402L,0x0810a000a0100804L,0x1020400040201008L,0x0402000204081020L,0x0805000508102040L,0x110a000a11204080L,0x2214001422418000L,0x4428002844820100L,0x8850005088040201L,0x10a000a010080402L,0x2040004020100804L,0x0200020408102040L,0x0500050810204080L,0x0a000a1120408000L,0x1400142241800000L,0x2800284482010000L,0x5000508804020100L,0xa000a01008040201L,0x4000402010080402L,0x0002040810204080L,0x0005081020408000L,0x000a112040800000L,0x0014224180000000L,0x0028448201000000L,0x0050880402010000L,0x00a0100804020100L,0x0040201008040201L,};
     public static Long bit_rookmoves[] = {0x01010101010101feL,0x02020202020202fdL,0x04040404040404fbL,0x08080808080808f7L,0x10101010101010efL,0x20202020202020dfL,0x40404040404040bfL,0x808080808080807fL,0x010101010101fe01L,0x020202020202fd02L,0x040404040404fb04L,0x080808080808f708L,0x101010101010ef10L,0x202020202020df20L,0x404040404040bf40L,0x8080808080807f80L,0x0101010101fe0101L,0x0202020202fd0202L,0x0404040404fb0404L,0x0808080808f70808L,0x1010101010ef1010L,0x2020202020df2020L,0x4040404040bf4040L,0x80808080807f8080L,0x01010101fe010101L,0x02020202fd020202L,0x04040404fb040404L,0x08080808f7080808L,0x10101010ef101010L,0x20202020df202020L,0x40404040bf404040L,0x808080807f808080L,0x010101fe01010101L,0x020202fd02020202L,0x040404fb04040404L,0x080808f708080808L,0x101010ef10101010L,0x202020df20202020L,0x404040bf40404040L,0x8080807f80808080L,0x0101fe0101010101L,0x0202fd0202020202L,0x0404fb0404040404L,0x0808f70808080808L,0x1010ef1010101010L,0x2020df2020202020L,0x4040bf4040404040L,0x80807f8080808080L,0x01fe010101010101L,0x02fd020202020202L,0x04fb040404040404L,0x08f7080808080808L,0x10ef101010101010L,0x20df202020202020L,0x40bf404040404040L,0x807f808080808080L,0xfe01010101010101L,0xfd02020202020202L,0xfb04040404040404L,0xf708080808080808L,0xef10101010101010L,0xdf20202020202020L,0xbf40404040404040L,0x7f80808080808080L};
@@ -49,15 +59,31 @@ public class bitboard extends cons{
 
     }
 
-    public static long scalarToBoardEdge(int startIndex, int scalar){
+    public static Long[] generateAllScalarToEdges(int scalar){
+        Long bb[] = new Long[64];
 
-        if(scalar == 1 || scalar == -1 || scalar == 8 || scalar == -8 || scalar == 9 || scalar == -9 || scalar == 7 || scalar == -7){throw new java.lang.RuntimeException("this is not quite as bad");}
+        for(int i = 0; i < 64; i++){
+            bb[i] = scalarToBoardEdge(i, scalar);
+        }
+
+        return bb;
+
+    }
+
+    public static Long scalarToBoardEdge(int startIndex, int scalar){
+
+        if(scalar == 1 || scalar == -1 || scalar == 8 || scalar == -8 || scalar == 9 || scalar == -9 || scalar == 7 || scalar == -7){throw new java.lang.RuntimeException("Incorrect input");}
 
         long bb = 1L << startIndex;
-        int current_square = startIndex;
+        int currentSquare = startIndex;
+        int nextSquare;
 
         while (true) {
-            bb
+            nextSquare = currentSquare + scalar;
+            if (nextSquare >= 64 || nextSquare < 0) {break;}
+            if (Math.abs((nextSquare % 8) - (currentSquare % 8)) > 1) {break;}
+            currentSquare = nextSquare;
+            bb |= 1L << currentSquare;
         }
 
         return bb;
@@ -95,28 +121,21 @@ public class bitboard extends cons{
         //    [RANK]
         //    <   R   O   W   S   >
 
-        Long bitsafter = 0L;
-        long vector = Math.abs(startIndex - endIndex);
+        int startIndexRow = startIndex / 8;
+        int startIndexCol = startIndex % 8;
+        int endIndexRow = endIndex / 8;
+        int endIndexCol = endIndex % 8;
 
-        long mask = (((1L << endIndex) - 1) | endIndex); if(startIndex < endIndex){mask = ~mask;};
+        boolean startGreatherThanEnd = startIndex > endIndex;
 
+        if(startIndexRow == endIndexRow){
+            if(startGreatherThanEnd){
+                // finish logic
+            }
+        } else if (startIndexCol == endIndexCol){
 
+        }
 
-        if(vector == 0L){return 0L;} // Identical start and ends
-
-        int scalar = ((startIndex < endIndex) ? 1 : -1);
-
-        if(startIndex % 8 == endIndex % 8){ // Same rank
-            return mask_cols[endIndex % 8] & mask;
-        } else if(startIndex / 8 == endIndex / 8){ // same row
-            return mask_rows[endIndex / 8] & mask;
-        } else if(((1L << vector) & 0x2040810204080L) > 0) { // North west to south east diagonal -> \ 
-            scalar *= 7;
-        } else if((1L << vector & 0x8040201008040200L) > 0){// South west to north east diagonal -> /
-            scalar *= 9;
-        } else {return 0L;};
-
-        return bitsafter;
     }
     
     
