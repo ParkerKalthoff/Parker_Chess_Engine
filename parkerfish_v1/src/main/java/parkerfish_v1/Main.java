@@ -4,10 +4,17 @@ public class Main extends bitboard{
     public static void main(String[] args) {
 
         //printBitboard(1L << A2);
-        System.out.println(bits_row[A1]);
-
-        printBitboard(1L << A1, true);
+        printBitboard(bit_after[A1][A3]);
+        printBitboard(bit_between[A1][A3]);
     }
+
+
+
+
+
+
+
+
     public static void printBitboard(long bitboard, boolean with_coords) {
         for (int rank = 7; rank >= 0; rank--) {  // Start from the top rank (rank 7)
             System.out.print(with_coords ? (""+(rank+1)+"   ") : "");
