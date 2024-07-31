@@ -37,8 +37,8 @@ public class bitboard extends cons{
     public static Long mask_isolated[] = new Long[64];
     public static Long kingside = 0xf0f0f0f0f0f0f0f0L;
     public static Long queenside = 0x0f0f0f0f0f0f0f0fL;
-    public static Long not_a_file;
-    public static Long not_h_file;
+    public static Long not_a_file = 0xfefefefefefefefeL;
+    public static Long not_h_file = 0x7f7f7f7f7f7f7f7fL;
 
     public static int bits_row[] = {0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7};
     public static int bits_rank[] = {0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7};

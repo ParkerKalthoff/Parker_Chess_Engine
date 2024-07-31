@@ -4,8 +4,7 @@ public class Main extends bitboard{
     public static void main(String[] args) {
 
         //printBitboard(1L << A2);
-        printBitboard(bit_after[A1][A3]);
-        printBitboard(bit_between[A1][A3]);
+        printBitboard(0xfefefefefefefefeL);
     }
 
 
